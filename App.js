@@ -1,25 +1,22 @@
-import { useState } from 'react';
-import { View } from 'react-native';
-import { Title } from './src/components/Title';
-import { StatusBar } from 'expo-status-bar';
-import { Paragraph } from './src/components/Paragraph';
-import { Input } from './src/components/Input';
-import { Selector } from './src/components/Selector';
+import { useState } from "react";
+import { View } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { Title, Paragraph, Input, Selector, Timer } from "./src/components/";
 
 const BASE_INFUSION_TIME = {
-  '1/10': [10, 10, 15, 20, 30, 45, 60, 120, 180, 300, 480],
-  '1/15': [10, 10, 15, 20, 30, 45, 60, 120, 180, 300, 480],
-  '1/30': [20, 20, 30, 45, 60, 120, 180, 300, 480],
-  '1/50': [120, 180, 300, 480],
-  '1/100': [300, 480],
+  "1/10": [10, 10, 15, 20, 30, 45, 60, 120, 180, 300, 480],
+  "1/15": [10, 10, 15, 20, 30, 45, 60, 120, 180, 300, 480],
+  "1/30": [20, 20, 30, 45, 60, 120, 180, 300, 480],
+  "1/50": [120, 180, 300, 480],
+  "1/100": [300, 480],
 };
 
 const CONCENTRATIONS = [
-  { value: 10, label: '1/10' },
-  { value: 15, label: '1/15' },
-  { value: 30, label: '1/30' },
-  { value: 50, label: '1/50' },
-  { value: 100, label: '1/100' },
+  { value: 10, label: "1/10" },
+  { value: 15, label: "1/15" },
+  { value: 30, label: "1/30" },
+  { value: 50, label: "1/50" },
+  { value: 100, label: "1/100" },
 ];
 
 export default function App() {
@@ -27,8 +24,10 @@ export default function App() {
   const [size, setSize] = useState("");
 
   return (
-    <View className="flex flex-col lg:p-0 lg:justify-center 
-      items-center h-full w-full bg-white dark:bg-slate-800">
+    <View
+      className="flex flex-col lg:p-0 lg:justify-center 
+      items-center h-full w-full bg-white dark:bg-slate-800"
+    >
       <Title titleClassName="pt-20">Tea App</Title>
       <View className="flex flex-col justify-center mt-5 lg:mt-10 w-5/6 max-w-screen-md">
         <Paragraph className="mb-5 lg:mb-10 text-sm">
@@ -53,7 +52,9 @@ export default function App() {
             keyboardType="numeric"
           />
         </View>
-        {!concentration ? <Paragraph>Please select a concentration</Paragraph> : null}
+        {!concentration ? (
+          <Paragraph>Please select a concentration</Paragraph>
+        ) : null}
         {!size && <Paragraph>Please select a size</Paragraph>}
         {/* TODO remove from form and add timer */}
         {concentration && size && (
@@ -62,17 +63,10 @@ export default function App() {
               {Math.ceil(size / concentration).toString()} g
             </Paragraph>
             <Paragraph>
-              {
-                BASE_INFUSION_TIME[
-                  `1/${concentration}`
-                ].length
-              }{' '}
-              steeps:{' '}
-              {BASE_INFUSION_TIME[
-                `1/${concentration}`
-              ].join(', ')}{' '}
-              seconds
+              {BASE_INFUSION_TIME[`1/${concentration}`].length} steeps:{" "}
+              {BASE_INFUSION_TIME[`1/${concentration}`].join(", ")} seconds
             </Paragraph>
+            <Timer infusionTime={BASE_INFUSION_TIME[`1/${concentration}`]} />
           </>
         )}
       </View>
