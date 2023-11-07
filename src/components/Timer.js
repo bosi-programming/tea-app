@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Pressable } from "react-native";
+import { Pressable, useWindowDimensions } from "react-native";
 import { Paragraph } from "./Paragraph";
 import { useSound } from "../hooks/useSound";
+import classNames from "classnames";
 
 const timerText = (time) => {
   const date = new Date(1000 * time);
@@ -9,11 +10,14 @@ const timerText = (time) => {
 };
 
 export function Timer({ infusionTime }) {
+  const { height } = useWindowDimensions();
   const [playSound] = useSound(require("../assets/beep.mp3"));
   const [start, setStart] = useState(false);
   const [steep, setSteep] = useState(0);
   const [time, setTime] = useState(infusionTime[steep]);
   const [timeText, setTimeText] = useState("Start timer");
+
+  const isOnSmallScreen = height < 640;
 
   useEffect(() => {
     if (start) {
@@ -46,7 +50,12 @@ export function Timer({ infusionTime }) {
 
   return (
     <>
-      <Paragraph paragraphClassName="mt-10 text-center">
+      <Paragraph
+        paragraphClassName={classNames(
+          "text-center",
+          isOnSmallScreen ? "mt-1" : "mt-10"
+        )}
+      >
         You are on steep {steep + 1} of {infusionTime.length}
       </Paragraph>
       <Pressable
