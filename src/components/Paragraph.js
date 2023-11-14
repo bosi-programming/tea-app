@@ -10,7 +10,7 @@ export function Paragraph({ paragraphClassName, children }) {
         'pt-2',
         'pb-2',
         'text-slate-900',
-        'dark:text-slate-100',
+        'dark:text-peach',
         'leading-relaxed',
         paragraphClassName,
       )}

@@ -29,7 +29,7 @@ export default function App() {
   return (
     <View
       className="flex flex-col lg:p-0 lg:justify-center 
-      items-center h-full w-full bg-white dark:bg-slate-800"
+      items-center h-full w-full bg-white dark:bg-green"
     >
       <Title titleClassName={isOnSmallScreen ? "pt-10" : "pt-20"}>
         Tea App
