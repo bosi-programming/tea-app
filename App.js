@@ -21,7 +21,7 @@ const CONCENTRATIONS = [
 
 export default function App() {
   const { height } = useWindowDimensions();
-  const [concentration, setConcentration] = useState("");
+  const [concentration, setConcentration] = useState();
   const [size, setSize] = useState("");
 
   const isOnSmallScreen = height < 640;
@@ -52,7 +52,7 @@ export default function App() {
           />
           <Input
             labelChildren="Size of vessel in ml"
-            selectedValue={size?.toString()}
+            selectedValue={size?.toString() || ""}
             onChangeText={(val) => setSize(Number(val))}
             type="number"
             inputClassName="w-full"
@@ -62,9 +62,9 @@ export default function App() {
         {!concentration ? (
           <Paragraph>Please select a concentration</Paragraph>
         ) : null}
-        {!size && <Paragraph>Please select a size</Paragraph>}
+        {!size ? <Paragraph>Please select a size</Paragraph> : null}
         {/* TODO remove from form and add timer */}
-        {concentration && size && (
+        {concentration && size ? (
           <>
             {isOnSmallScreen ? (
               <Paragraph>
@@ -85,7 +85,7 @@ export default function App() {
             )}
             <Timer infusionTime={BASE_INFUSION_TIME[`1/${concentration}`]} />
           </>
-        )}
+        ) : null}
       </View>
       <StatusBar style="auto" />
     </View>
