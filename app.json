@@ -2,7 +2,7 @@
   "expo": {
     "name": "tea-app",
     "slug": "tea-app",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -22,7 +22,8 @@
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#1e2d2f"
       },
-      "package": "com.bosiprogramming.teaapp"
+      "package": "com.bosiprogramming.teaapp",
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/favicon.png"
